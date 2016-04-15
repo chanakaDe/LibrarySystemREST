@@ -16,21 +16,15 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-
     public function index()
     {
-
         $Users = User::all();
-
         return response()->json($Users);
-
     }
 
     public function getUser($id)
     {
-
         $User = User::find($id);
-
         return response()->json($User);
     }
 
@@ -44,7 +38,7 @@ class UserController extends Controller
                 'email' => $request->input('email'),
                 'permission_level' => $request->input('permission_level'),
                 'dob' => $request->input('dob'),
-                'password' => password_hash($request->input('password'), PASSWORD_DEFAULT)
+                'password' => password_hash($request->input('password'), PASSWORD_BCRYPT)
             ]);
             return response()->json($User);
         } else {
@@ -56,7 +50,6 @@ class UserController extends Controller
     {
         $User = User::find($id);
         $User->delete();
-
         return response()->json('deleted');
     }
 
@@ -67,13 +60,15 @@ class UserController extends Controller
         $User = User::where('email', '=', $email)->get();
         $User = $User->makeVisible('password')->toArray();
 
-        if (hash_equals($User[0]['password'], crypt($password, $User[0]['password']))) {
-            echo "Password verified!";
+        if (count($User) == 0) {
+            return response()->json('No user found');
         } else {
-            echo "Login error";
+            if (hash_equals($User[0]['password'], crypt($password, $User[0]['password']))) {
+                return response()->json('Login successful');
+            } else {
+                return response()->json('Login Error');
+            }
         }
-
-//        return response()->json($User);
     }
 
 }
