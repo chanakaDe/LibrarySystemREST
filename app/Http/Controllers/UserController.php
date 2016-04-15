@@ -58,11 +58,27 @@ class UserController extends Controller
 
     public function loginUser(Request $request)
     {
+//        $email = $request->input('email');
+//        $hashed_password = ""; //want to get password from SQL according to user email and do following check.
+//        if (hash_equals($hashed_password, crypt($request->input('password'), $hashed_password))) {
+//            echo "Password verified!";
+//        }
+
         $email = $request->input('email');
-        $hashed_password = ""; //want to get password from SQL according to user email and do following check.
-        if (hash_equals($hashed_password, crypt($request->input('password'), $hashed_password))) {
-            echo "Password verified!";
-        }
+        $password = $request->input('password');
+        $User = User::where('email', '=', $email)->get();
+        $User = $User->makeVisible('password')->toArray();
+        return response()->json($User);
+//        if (!empty($user->count())) {
+//            $user = $user->makeVisible('password')->toArray();
+//            if (\Hash::check($password, $user['password'])) {
+//                echo 'logged in';
+//            } else {
+//                echo 'wrong email or password';
+//            }
+//        } else {
+//            echo 'wrong email or password';
+//        }
     }
 
 }
