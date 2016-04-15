@@ -36,4 +36,5 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
     $app->get('user/{id}', 'UserController@getUser');
     $app->post('user', 'UserController@createUser');
     $app->delete('user/{id}', 'UserController@deleteUser');
+    $app->post('user/login', 'UserController@loginUser');
 });

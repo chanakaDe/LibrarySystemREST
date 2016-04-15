@@ -36,10 +36,6 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-//        $hashed_password = crypt($request->input('password'), 'cs');
-//        if (hash_equals($hashed_password, crypt("456", $hashed_password))) {
-//            echo "Password verified!";
-//        }
 
         $User = User::create([
             'name' => $request->input('name'),
@@ -60,15 +56,13 @@ class UserController extends Controller
         return response()->json('deleted');
     }
 
-//    public function updateBook(Request $request, $id)
-//    {
-//        $Book = User::find($id);
-//        $Book->title = $request->input('title');
-//        $Book->author = $request->input('author');
-//        $Book->isbn = $request->input('isbn');
-//        $Book->save();
-//
-//        return response()->json($Book);
-//    }
+    public function loginUser(Request $request)
+    {
+        $email = $request->input('email');
+        $hashed_password = ""; //want to get password from SQL according to user email and do following check.
+        if (hash_equals($hashed_password, crypt($request->input('password'), $hashed_password))) {
+            echo "Password verified!";
+        }
+    }
 
 }
