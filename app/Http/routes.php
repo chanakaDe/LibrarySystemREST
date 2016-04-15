@@ -30,4 +30,10 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
     $app->post('order', 'OrderController@createOrder');
     $app->delete('order/{id}', 'OrderController@deleteOrder');
     $app->put('order/{id}', 'OrderController@updateOrder');
+
+//    Users
+    $app->get('user', 'UserController@index');
+    $app->get('user/{id}', 'UserController@getUser');
+    $app->post('user', 'UserController@createUser');
+    $app->delete('user/{id}', 'UserController@deleteUser');
 });
