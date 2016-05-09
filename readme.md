@@ -41,6 +41,10 @@ In this API, we are creating options to manage users, manage books, add new orde
 * Update order[PUT] : http://localhost:8080/api/v1/order/1
 * Delete order[DELETE] : http://localhost:8080/api/v1/order/1
 
+### How to run
+
+##### Navigate to public folder and run the command : php -S localhost:8000
+
 ### License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
