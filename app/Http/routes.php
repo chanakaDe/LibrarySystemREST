@@ -19,10 +19,10 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
 
 //    Books
     $app->get('book', 'BookController@index');
-    $app->get('book/{id}', 'BookController@getbook');
+    $app->get('book/{book_id}', 'BookController@getbook');
     $app->post('book', 'BookController@createBook');
-    $app->put('book/{id}', 'BookController@updateBook');
-    $app->delete('book/{id}', 'BookController@deleteBook');
+    $app->put('book/{book_id}', 'BookController@updateBook');
+    $app->delete('book/{book_id}', 'BookController@deleteBook');
 
 //    Orders
     $app->get('order', 'OrderController@index');

@@ -13,7 +13,17 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
 
-    protected $fillable = ['title', 'author', 'isbn'];
+    protected $fillable =
+        [
+            'title',
+            'author',
+            'isbn',
+            'publisher',
+            'publication_date',
+            'copies_count',
+            'available_copies',
+            'description'
+        ];
 
 }
 

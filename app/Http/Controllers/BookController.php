@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
 
-
     public function index()
     {
 
@@ -29,8 +28,7 @@ class BookController extends Controller
 
     public function getBook($id)
     {
-
-        $Book = Book::find($id);
+        $Book = Book::where('book_id', '=', $id)->get();
 
         return response()->json($Book);
     }
@@ -46,7 +44,8 @@ class BookController extends Controller
 
     public function deleteBook($id)
     {
-        $Book = Book::find($id);
+//        $Book = Book::find($id);
+        $Book = Book::where('book_id', '=', $id);
         $Book->delete();
 
         return response()->json('deleted');
@@ -54,11 +53,12 @@ class BookController extends Controller
 
     public function updateBook(Request $request, $id)
     {
-        $Book = Book::find($id);
-        $Book->title = $request->input('title');
-        $Book->author = $request->input('author');
-        $Book->isbn = $request->input('isbn');
-        $Book->save();
+        $Book = Book::where('book_id', '=', $id)
+            ->update(['title' => $request->input('title'), 'author' => $request->input('author'),
+                'isbn' => $request->input('isbn'), 'publisher' => $request->input('publisher'),
+                'publication_date' => $request->input('publication_date'), 'copies_count' => $request->input('copies_count'),
+                'available_copies' => $request->input('available_copies'), 'description' => $request->input('description')
+            ]);
 
         return response()->json($Book);
     }
