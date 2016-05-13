@@ -38,6 +38,7 @@ class UserController extends Controller
                 'email' => $request->input('email'),
                 'permission_level' => $request->input('permission_level'),
                 'dob' => $request->input('dob'),
+                'note' => $request->input('note'),
                 'password' => password_hash($request->input('password'), PASSWORD_BCRYPT)
             ]);
             return response()->json($User);
