@@ -20,6 +20,7 @@ class CreateCheckoutTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('checkout_type');
             $table->date('due_date');
+            $table->string('note');
             $table->timestamps();
         });
     }

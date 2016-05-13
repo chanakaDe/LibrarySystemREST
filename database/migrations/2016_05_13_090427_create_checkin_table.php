@@ -24,6 +24,7 @@ class CreateCheckinTable extends Migration
             $table->date('due_date');
             $table->date('handed_date');
             $table->double('late_charges');
+            $table->string('note');
 
             $table->timestamps();
         });
