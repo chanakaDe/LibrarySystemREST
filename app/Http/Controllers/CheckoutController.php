@@ -44,10 +44,10 @@ class CheckoutController extends Controller
         ]);
 
 //      Updating book available count.
-//        $Book = Book::where('book_id', '=', $request->input('book_id'));
-//        $Book->available_copies =  $Book->available_copies-1;
-//        $Book->save();
-
+        $Book = Book::where('book_id', '=', $request->input('book_id'))->get();
+        $UpdateBook = Book::where('book_id', '=', $request->input('book_id'))
+            ->update(['available_copies' => ($Book[0]->available_copies - 1)]);
+        $Checkout->book_update_status = $UpdateBook;
         return response()->json($Checkout);
 
     }
