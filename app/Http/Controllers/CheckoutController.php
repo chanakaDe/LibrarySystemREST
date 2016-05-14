@@ -29,7 +29,6 @@ class CheckoutController extends Controller
     {
 
         $Checkout = Checkout::find($id);
-
         return response()->json($Checkout);
     }
 
@@ -58,6 +57,7 @@ class CheckoutController extends Controller
 
     /**Before removing checkout, have to update the book count(+1)
      * and un assign the user form that book checkout.
+     * As for now, this is not a essential feature.
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -66,8 +66,7 @@ class CheckoutController extends Controller
         $Checkout = Checkout::find($id);
         $Checkout->delete();
 
-//        return response()->json('deleted');
-        return response()->json($Checkout->book_id);
+        return response()->json('deleted');
     }
 
     public function updateCheckout(Request $request, $id)
