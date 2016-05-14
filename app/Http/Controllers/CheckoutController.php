@@ -33,6 +33,10 @@ class CheckoutController extends Controller
         return response()->json($Checkout);
     }
 
+    /**This method has ability to create new checkout and update the book available count.
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createBookCheckout(Request $request)
     {
 //      Saving new checkout.
@@ -52,12 +56,18 @@ class CheckoutController extends Controller
 
     }
 
+    /**Before removing checkout, have to update the book count(+1)
+     * and un assign the user form that book checkout.
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function deleteCheckout($id)
     {
         $Checkout = Checkout::find($id);
         $Checkout->delete();
 
-        return response()->json('deleted');
+//        return response()->json('deleted');
+        return response()->json($Checkout->book_id);
     }
 
     public function updateCheckout(Request $request, $id)
