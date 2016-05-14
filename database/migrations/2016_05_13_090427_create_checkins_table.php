@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCheckoutTable extends Migration
+class CreateCheckinsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,20 @@ class CreateCheckoutTable extends Migration
      */
     public function up()
     {
-        Schema::create('checkout', function (Blueprint $table) {
+        Schema::create('checkins', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('checkout_id');
             $table->integer('book_id')->unsigned();
-            $table->foreign('book_id')->references('book_id')->on('books');
+            $table->foreign('book_id')->references('book_id')->on('books')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('checkout_type');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->date('checkout_date');
             $table->date('due_date');
+            $table->date('handed_date');
+            $table->double('late_charges');
             $table->string('note');
+
             $table->timestamps();
         });
     }
@@ -32,6 +37,6 @@ class CreateCheckoutTable extends Migration
      */
     public function down()
     {
-        Schema::drop('checkout');
+        Schema::drop('checkin');
     }
 }

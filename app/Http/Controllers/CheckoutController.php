@@ -8,13 +8,13 @@
 namespace App\Http\Controllers;
 
 use App\Checkout;
+use App\Book;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
 class CheckoutController extends Controller
 {
-
 
     public function index()
     {
@@ -33,10 +33,20 @@ class CheckoutController extends Controller
         return response()->json($Checkout);
     }
 
-    public function createCheckout(Request $request)
+    public function createBookCheckout(Request $request)
     {
+//      Saving new checkout.
+        $Checkout = Checkout::create(['book_id' => $request->input('book_id'),
+            'user_id' => $request->input('user_id'),
+            'checkout_type' => $request->input('checkout_type'),
+            'due_date' => $request->input('due_date'),
+            'note' => $request->input('note')
+        ]);
 
-        $Checkout = Checkout::create($request->all());
+//      Updating book available count.
+//        $Book = Book::where('book_id', '=', $request->input('book_id'));
+//        $Book->available_copies =  $Book->available_copies-1;
+//        $Book->save();
 
         return response()->json($Checkout);
 
@@ -50,7 +60,7 @@ class CheckoutController extends Controller
         return response()->json('deleted');
     }
 
-    public function updateOrder(Request $request, $id)
+    public function updateCheckout(Request $request, $id)
     {
         $Order = Checkout::find($id);
         $Order->book_id = $request->input('book_id');

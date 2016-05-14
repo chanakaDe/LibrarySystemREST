@@ -26,11 +26,11 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
     $app->delete('book/{book_id}', 'BookController@deleteBook');
 
 //    Orders
-    $app->get('order', 'OrderController@index');
-    $app->get('order/{id}', 'OrderController@getOrder');
-    $app->post('order', 'OrderController@createOrder');
-    $app->delete('order/{id}', 'OrderController@deleteOrder');
-    $app->put('order/{id}', 'OrderController@updateOrder');
+    $app->get('checkout', 'CheckoutController@index');
+    $app->get('checkout/{id}', 'CheckoutController@getCheckout');
+    $app->post('checkout', 'CheckoutController@createBookCheckout');
+    $app->delete('checkout/{id}', 'CheckoutController@deleteCheckout');
+    $app->put('checkout/{id}', 'CheckoutController@updateCheckout');
 
 //    Users
     $app->get('user', 'UserController@index');
