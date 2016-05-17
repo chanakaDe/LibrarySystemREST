@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Checkin;
 use App\Checkout;
 use App\Book;
+use App\Charge;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -58,6 +59,14 @@ class CheckinController extends Controller
 //      Removing selected checkout.
         $Checkout = Checkout::find($request->input('checkout_id'));
         $Checkout->delete();
+
+//      Create a new charge entry
+         $Charge = Charge::create(['book_id' => $request->input('book_id'),
+                    'user_id' => $request->input('user_id'),
+                    'charge' => $request->input('late_charges'),
+                    'checkin_id' => $Checkin->id
+                ]);
+         // $Checkin->charge_added_status = $Charge;
 
         return response()->json($Checkin);
 

@@ -24,6 +24,7 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
     $app->post('book', 'BookController@createBook');
     $app->put('book/{book_id}', 'BookController@updateBook');
     $app->delete('book/{book_id}', 'BookController@deleteBook');
+    $app->get('book/isbm/{isbmNo}', 'BookController@bookDataByIsbn');
 
 //    Checkout
     $app->get('checkout', 'CheckoutController@index');
@@ -38,6 +39,11 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers'], funct
     $app->post('checkin', 'CheckinController@createBookCheckin');
     $app->delete('checkin/{id}', 'CheckinController@deleteCheckin');
     $app->put('checkin/{id}', 'CheckinController@updateCheckin');
+
+    //    Charge
+    $app->get('charge', 'ChargeController@index');
+    $app->get('charge/{id}', 'ChargeController@getCharge');
+    $app->get('charge/user/{id}', 'ChargeController@getChargeByUser');
 
 //    Users
     $app->get('user', 'UserController@index');

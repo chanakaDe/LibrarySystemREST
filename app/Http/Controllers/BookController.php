@@ -63,4 +63,18 @@ class BookController extends Controller
         return response()->json($Book);
     }
 
+    /**
+     * This function calls a third party url and get data by ISBN.
+     * https://openlibrary.org/api/books?bibkeys=ISBN:0425120279&format=json&jscmd=data
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bookDataByIsbn($id)
+    {
+        $Book = json_decode(file_get_contents('https://openlibrary.org/api/books?bibkeys=ISBN:0425120279&format=json&jscmd=data'), true);
+        return response()->json($Book);
+    }
+
+    
+
 }
